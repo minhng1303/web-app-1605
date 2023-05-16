@@ -20,17 +20,17 @@ const BlogList = ({ blogs, handleOpenCreateModal, handleFilterCaterogy, categori
       <div className='col-12 px-0 d-flex align-items-center' style={{ textAlign: 'right', margin: '20px 0' }}>
         <div className='col-8'>
           <SearchBar
-          value={searchKey}
-          clearSearch={clearSearch}
-          formSubmit={formSubmit}
-          handleSearchKey={(e) => handleSearchKey(e.target.value)}
+            value={searchKey}
+            clearSearch={clearSearch}
+            formSubmit={formSubmit}
+            handleSearchKey={(e) => handleSearchKey(e.target.value)}
           />
         </div>
         <Button variant="outlined" style={{ margin: '10px' }} size='medium' onClick={handleOpenCreateModal}
           startIcon={<AddCircleIcon fontSize="small" />}>
           Add Blog
         </Button>
-        <FormControl variant='standard' style={{width: '150px', paddingBottom: '8px'}}>
+        <FormControl variant='standard' style={{ width: '150px', paddingBottom: '8px' }}>
           <InputLabel id="demo-simple-select-label">Category</InputLabel>
           <Select
             labelId="demo-simple-select-standard-label"

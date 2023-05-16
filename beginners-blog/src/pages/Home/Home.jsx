@@ -18,15 +18,24 @@ const initialValue = {
   image: '',
 }
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
+  { value: 'sport', label: 'Sport' },
+  { value: 'social', label: 'Social' },
+  { value: 'health', label: 'Health' },
+  { value: 'tech', label: 'Tech' },
+  { value: 'drama', label: 'Drama' },
+  { value: 'travel', label: 'Travel' },
+  { value: 'fitness', label: 'Fitness' },
+  { value: 'beauty', label: 'Beauty' },
+  { value: 'fashion', label: 'Fashion' },
+  { value: 'environment', label: 'Enviroment' },
+  { value: 'politics', label: 'Politics' },
+  { value: 'finance', label: 'Finance' },
 ]
 const initPaginator = {
   pageCount: 10,
   currentPage: 1
 }
-const Home = ({props}) => {
+const Home = ({ props }) => {
   const [blogs, setBlogs] = useState(blogList);
   const [paginator, setPaginator] = useState(initPaginator);
   const [searchKey, setSearchKey] = useState('');
@@ -37,7 +46,7 @@ const Home = ({props}) => {
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
-  const [errors, setErrors] = useState({blogName: '', category: '', image: ''})
+  const [errors, setErrors] = useState({ blogName: '', category: '', image: '' })
 
   const [snackbarState, setSnackbarState] = useState({
     openSuccess: false,
@@ -87,7 +96,7 @@ const Home = ({props}) => {
   }
 
   const createParamSearch = (paramSearch) => {
-    return { page: page, itemPerpage: itemPerPage, search: searchKey ,category: selectedCategory, ...paramSearch }
+    return { page: page, itemPerpage: itemPerPage, search: searchKey, category: selectedCategory, ...paramSearch }
   }
 
   const resetParamSearch = () => {
@@ -118,9 +127,9 @@ const Home = ({props}) => {
     }
     const result = await fetchCreateBlog(tempParams);
     if (result.data.success) {
-      setSnackbarState({...snackbarState, openSuccess: true, openFail: false})
+      setSnackbarState({ ...snackbarState, openSuccess: true, openFail: false })
       resetParamSearch();
-      const result = await fetchListBlogsApi(createParamSearch({category: ''}));
+      const result = await fetchListBlogsApi(createParamSearch({ category: '' }));
       if (result.data.success) {
         setBlogs(result.data.data.items);
         setPaginator(result.data.data.paginator);
@@ -129,7 +138,7 @@ const Home = ({props}) => {
         }, 200);
       }
     } else {
-      setSnackbarState({...snackbarState, openSuccess: false, openFail: true})
+      setSnackbarState({ ...snackbarState, openSuccess: false, openFail: true })
       console.log(result.data);
       setErrors(result.data.errors.errors)
     }
@@ -182,7 +191,7 @@ const Home = ({props}) => {
   }
 
   return (
-    <div  style={{backgroundColor: 'rgb(225 225 225)'}}>
+    <div style={{ backgroundColor: 'rgb(225 225 225)' }}>
       {/* Page Header */}
       <Header />
       <Backdrop
@@ -213,23 +222,23 @@ const Home = ({props}) => {
         key={snackbarState.vertical + snackbarState.horizontal}
       >
         {
-          snackbarState.openFail && 
+          snackbarState.openFail &&
           <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
             Add blog failed!
             {
-              errors.blogName && 
-              <div> 
+              errors.blogName &&
+              <div>
                 Blog name is required
-              </div> 
+              </div>
             }
             {
-              errors.category && 
+              errors.category &&
               <div>
                 Category is required
               </div>
             }
             {
-              errors.image && 
+              errors.image &&
               <div>
                 Image link is required
               </div>
@@ -239,16 +248,16 @@ const Home = ({props}) => {
       </Snackbar>
       <div className='container mt-2'>
         {/* Blog List & Empty View */}
-          <BlogList categories={categories}
-            selectedCategory={selectedCategory}
-            handleFilterCaterogy={filterCategory}
-            handleOpenCreateModal={handleOpenCreateModal}
-            blogs={blogs} 
-            value={searchKey}
-            handleSearchKey={handleSetSearchKey}
-            clearSearch={handleClearSearch}
-            formSubmit={handleSearchBar}
-            age={page} />
+        <BlogList categories={categories}
+          selectedCategory={selectedCategory}
+          handleFilterCaterogy={filterCategory}
+          handleOpenCreateModal={handleOpenCreateModal}
+          blogs={blogs}
+          value={searchKey}
+          handleSearchKey={handleSetSearchKey}
+          clearSearch={handleClearSearch}
+          formSubmit={handleSearchBar}
+          age={page} />
         <div className="d-flex justify-content-center mt-2">
           <PaginationComponent paginator={paginator} onPageChange={handleOnPageChange} itemPerPage={itemPerPage} />
         </div>
