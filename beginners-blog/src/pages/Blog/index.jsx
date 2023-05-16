@@ -73,7 +73,11 @@ const Blog = () => {
       const dataRelatedList = await fetchRelatedListBlogsApi({
         category: result.data.data?.category,
       })
-      setRelatedList(dataRelatedList.data.data.items);
+      if (result.data.data) {
+        setRelatedList(dataRelatedList.data.data.items);
+      } else {
+        setRelatedList([]);
+      }
     }
   }, []);
   useEffect(async () => {
