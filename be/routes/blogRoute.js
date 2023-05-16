@@ -36,12 +36,15 @@ router.get('/blogs/list', async (req, res) => {
             },
             page: page,
             limit: itemPerpage,
-            skip: page,
+            skip: page * itemPerpage,
             lean: true,
             populate,
             // select: fields,
             customLabels: myCustomLabels,
         };
+        if (page) options['page'] = page;
+        if(itemPerpage) options['limit'] = itemPerpage;
+        if (page && itemPerpage) options['skip'] = page * itemPerpage;
         const listBlog = await BlogsModel.paginate(conditions, options);
         if (listBlog) {
             return res.json(responseSuccess("List blog successfully!", listBlog));
