@@ -7,7 +7,7 @@ const {
 } = require('../utils/common');
 router.get('/blogs/list', async (req, res) => {
     try {
-        const { page , search, itemPerpage, category } = req.query;
+        const { page, search, itemPerpage, category } = req.query;
         const conditions = {
             isDeleted: "No",
         };
@@ -80,8 +80,8 @@ router.get('/blogs/relatedList', async (req, res) => {
             sort: {
                 createdAt: -1,
             },
-            page: page,
-            limit: limit,
+            page: page ? page : 1,
+            limit: limit ? limit : 4,
             lean: true,
             populate,
             // select: fields,
@@ -181,7 +181,7 @@ router.delete('/blogs/delete', async (req, res) => {
 router.get('/blogs/categories', async (req, res) => {
     try {
         const categories = await BlogsModel.aggregate([
-            {"$group" : {_id:"$category", count:{$sum:1}}}
+            { "$group": { _id: "$category", count: { $sum: 1 } } }
         ]);
         return res.json(responseSuccess("List of categories", categories))
     } catch (err) {

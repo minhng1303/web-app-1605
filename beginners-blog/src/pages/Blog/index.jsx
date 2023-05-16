@@ -35,9 +35,18 @@ const initialValue = {
   image: '',
 }
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
+  { value: 'sport', label: 'Sport' },
+  { value: 'social', label: 'Social' },
+  { value: 'health', label: 'Health' },
+  { value: 'tech', label: 'Tech' },
+  { value: 'drama', label: 'Drama' },
+  { value: 'travel', label: 'Travel' },
+  { value: 'fitness', label: 'Fitness' },
+  { value: 'beauty', label: 'Beauty' },
+  { value: 'fashion', label: 'Fashion' },
+  { value: 'environment', label: 'Enviroment' },
+  { value: 'politics', label: 'Politics' },
+  { value: 'finance', label: 'Finance' },
 ]
 const Blog = () => {
   const { id } = useParams();
@@ -158,7 +167,7 @@ const Blog = () => {
     if (result.data.success) {
       goToHome()
     } else {
-      setSnackbarState({...snackbarState, openFail: true})
+      setSnackbarState({ ...snackbarState, openFail: true })
     }
   }
 
@@ -198,7 +207,7 @@ const Blog = () => {
   // const dataTagList = [{}, {}, {}];
   return (
     <div className='container'>
-       <Snackbar
+      <Snackbar
         anchorOrigin={{ vertical: snackbarState.vertical, horizontal: snackbarState.horizontal }}
         open={snackbarState.openFail}
         onClose={handleCloseSnackbar}
@@ -206,14 +215,14 @@ const Blog = () => {
         key={snackbarState.vertical + snackbarState.horizontal}
       >
         {
-          snackbarState.openFail && 
+          snackbarState.openFail &&
           <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
             Delete blog failed!
           </Alert>
         }
       </Snackbar>
       <Link className='blog-goBack' to='/'>
-        <Chip label="Go back" color="primary" variant="outlined" icon={<ArrowBackIcon />}/>
+        <Chip label="Go back" color="primary" variant="outlined" icon={<ArrowBackIcon />} />
       </Link>
       <Container>
         <Row>
@@ -333,7 +342,7 @@ const Blog = () => {
               Do you want to delete this blog?
             </Typography>
             <div className='d-flex justify-content-end mt-2'>
-            <Button variant="contained" color='success' size='small' style={{marginRight: "5px"}} onClick={() => handleDeleteBlog()}>Yes</Button>
+              <Button variant="contained" color='success' size='small' style={{ marginRight: "5px" }} onClick={() => handleDeleteBlog()}>Yes</Button>
               <Button variant="contained" color='error' size='small' onClick={() => setShowDeleteModal(false)}>No</Button>
             </div>
           </Box>
