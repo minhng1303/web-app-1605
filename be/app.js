@@ -10,24 +10,12 @@ db.once('open', () => {
     console.log('database connected');
 })
 
-const authMiddleware = require('./middleware/auth');
-
-const userRoute = require('./routes/user');
-const homeRoute = require('./routes/home');
-const positionRoute = require('./routes/position');
-const itemRoute = require('./routes/item');
-const authRoute = require('./routes/auth');
 const commentRoute = require('./routes/commentRoute')
 const blogRoute = require('./routes/blogRoute')
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/', userRoute);
-app.use('/', homeRoute);
-app.use('/', positionRoute);
-app.use('/', itemRoute);
-app.use('/', authRoute);
 app.use('/', commentRoute);
 app.use('/', blogRoute);
 app.listen(3003, () => {
