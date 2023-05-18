@@ -26,7 +26,7 @@ const BlogList = ({ blogs, handleOpenCreateModal, handleFilterCaterogy, categori
             handleSearchKey={(e) => handleSearchKey(e.target.value)}
           />
         </div>
-        <Button variant="outlined" style={{ margin: '10px' }} size='medium' onClick={handleOpenCreateModal}
+        <Button className="btn-add" variant="outlined" style={{ margin: '10px' }} size='medium' onClick={handleOpenCreateModal}
           startIcon={<AddCircleIcon fontSize="small" />}>
           Add Blog
         </Button>

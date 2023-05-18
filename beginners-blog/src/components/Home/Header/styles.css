@@ -1,5 +1,5 @@
 .home-header {
-  background-image: url('../../../images/top-view-desk-with-office-supplies.jpg');
+  /* background-image: url('../../../images/cover.png'); */
   background-repeat: no-repeat;
   text-align: center;
   background-size: cover;
@@ -50,4 +50,8 @@
 .left-box p {
   margin: 0;
   color: #000;
+}
+
+.white-color {
+  color: #fff !important;
 }

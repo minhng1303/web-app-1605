@@ -31,3 +31,12 @@
   background-color: #0f52ba;
   color: #fff;
 }
+
+.btn-search-header {
+  background-color: #000 !important;
+  padding: 0.6rem 0.2rem !important;
+}
+
+.btn-search-header:hover {
+  background-color: #322926e4 !important;
+}

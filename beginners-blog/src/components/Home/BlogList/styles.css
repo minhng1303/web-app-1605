@@ -19,3 +19,9 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+.btn-add {
+  background-color: #e1e1e1 !important;
+  color: #000 !important;
+  border: 1px solid #000 !important;
+}

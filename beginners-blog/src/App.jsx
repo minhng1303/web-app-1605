@@ -5,6 +5,7 @@ import Blog from './pages/Blog';
 import Home from './pages/Home/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Home/Navbar';
+import Footers from './components/common/Footers';
 
 const App = () => {
   return (
@@ -17,9 +18,10 @@ const App = () => {
           <Redirect to='/' />
         </Switch>
       </div>
+      <Footers />
     </div>
   );
-  
+
 };
 
 export default App;

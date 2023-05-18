@@ -9,7 +9,9 @@ import PaginationComponent from '../../components/common/Pagination/Pagination';
 import { Alert, Backdrop, CircularProgress, Snackbar } from '@mui/material';
 import { useLocation } from 'react-router-dom'
 import { red } from '@mui/material/colors';
-
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 const initialValue = {
   blogName: '',
   description: '',
@@ -47,7 +49,15 @@ const Home = ({ props }) => {
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
   const [errors, setErrors] = useState({ blogName: '', category: '', image: '' })
+  const [showDialogCover, setShowDialogCover] = useState(false);
 
+  const [coverPage, setCoverPage] = useState('https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')
+  const handleOpenDialogCover = () => {
+    setShowDialogCover(true);
+  }
+  const handleOnChangeCover = (event) => {
+    setCoverPage(event.target.value);
+  }
   const [snackbarState, setSnackbarState] = useState({
     openSuccess: false,
     openFail: false,
@@ -193,7 +203,7 @@ const Home = ({ props }) => {
   return (
     <div style={{ backgroundColor: 'rgb(225 225 225)' }}>
       {/* Page Header */}
-      <Header />
+      <Header handleOpenDialogCover={handleOpenDialogCover} coverPage={coverPage} />
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -270,6 +280,21 @@ const Home = ({ props }) => {
           createParams={createParams}
           options={options}
         />
+        <Modal
+          show={showDialogCover}
+          onHide={() => setShowDialogCover(false)}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Modal title</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Cover page link</Form.Label>
+              <Form.Control type="email" placeholder="Enter cover link" onChange={(event) => handleOnChangeCover(event)} />
+            </Form.Group>
+          </Modal.Body>
+
+        </Modal>
       </div>
     </div >
   );

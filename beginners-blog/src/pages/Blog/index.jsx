@@ -221,9 +221,6 @@ const Blog = () => {
           </Alert>
         }
       </Snackbar>
-      <Link className='blog-goBack' to='/'>
-        <Chip label="Go back" color="primary" variant="outlined" icon={<ArrowBackIcon />} />
-      </Link>
       <Container>
         <Row>
           <Col sm={1} ></Col>
@@ -231,13 +228,13 @@ const Blog = () => {
             {blog ? (
               <div className='blog-wrap'>
                 <header>
-                  <p className='blog-date'>Published {blog.createdAt}</p>
                   <h1>{blog.blogName}</h1>
-                  <div className='blog-subCategory'>
-                    <Chip color='primary' label={blog.category} />
-                  </div>
+                  <p className='blog-date'>Published {blog.createdAt}</p>
                 </header>
                 <img src={blog.image} alt='cover' />
+                <div className='blog-subCategory'>
+                  <Chip color='primary' label={blog.category} />
+                </div>
                 <p className='blog-desc border-bottom'>{blog.description}</p>
                 <div className='d-flex justify-content-end my-3'>
                   <Chip color='primary' onClick={handleOpenEditModal} label="Edit blog" icon={<EditIcon fontSize='small' />} className="mr-3" style={{ marginRight: '10px' }} />
@@ -267,7 +264,7 @@ const Blog = () => {
                       onClick={handleOpenCommentDialog}
                       variant="primary">
                       <FontAwesomeIcon
-                        style={{ color: "#fff" }}
+                        style={{ color: "#000", fontSize: "24px" }}
                         icon={faComment} />
                     </Button>
                   </div>
@@ -283,37 +280,40 @@ const Blog = () => {
               <EmptyList />
             )}
           </Col>
-          <Col sm={3} className="mt-4">
+          <Col sm={3}></Col>
+          <Col sm={12} className="mt-4 pt-5 border-top related-wrapper">
             <h3>Related blog</h3>
-            {relatedList.map(data => (
-              <Card style={{ maxWidth: '18rem' }} className="mb-5">
-                <Card.Img variant="top" src="http://localhost:3000/assets/images/designer-1.jpg" />
-                <Card.Body>
-                  <Card.Title>
-                    <div className="d-flex justify-content-between">
-                      <span>{data.blogName}</span>
-                      {/* <RatingStar maxRating={5} value={data.rating} isShowValue={true} /> */}
-                    </div>
-                  </Card.Title>
-                  <Card.Text className="border-bottom pb-2">
-                    {data.description}
-                  </Card.Text>
-                  <div className="d-flex justify-content-end tag-list">
-                    {data?.tags?.length > 0 && blog.tags.map((tag, index) => {
-                      if (index > 2) {
-                        if (index > 3) return;
-                        return <span className="me-2 d-flex align-items-end">...</span>
-                      } else {
-                        return <Tag
-                          label="tag1"
-                        />
+            <div className="d-flex">
+              {relatedList.map(data => (
+                <Card style={{ maxWidth: '18rem' }} className="me-5">
+                  <Card.Img variant="top" src={data?.image} />
+                  <Card.Body>
+                    <Card.Title>
+                      <div className="d-flex justify-content-between">
+                        <span>{data?.blogName}</span>
+                        {/* <RatingStar maxRating={5} value={data.rating} isShowValue={true} /> */}
+                      </div>
+                    </Card.Title>
+                    <Card.Text className="border-bottom pb-2 overflow-hidden" style={{ height: "220px" }}>
+                      {data?.description}
+                    </Card.Text>
+                    <div className="d-flex justify-content-end tag-list">
+                      {data?.tags?.length > 0 && blog.tags.map((tag, index) => {
+                        if (index > 2) {
+                          if (index > 3) return;
+                          return <span className="me-2 d-flex align-items-end">...</span>
+                        } else {
+                          return <Tag
+                            label="tag1"
+                          />
+                        }
+                      })
                       }
-                    })
-                    }
-                  </div>
-                </Card.Body>
-              </Card>
-            ))}
+                    </div>
+                  </Card.Body>
+                </Card>
+              ))}
+            </div>
           </Col>
         </Row>
         <CommentModal
